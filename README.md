@@ -1,1 +1,1 @@
-# Asgard: WordPress Blogging Theme
+# Asgard: Custom WordPress Theme
