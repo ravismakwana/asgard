@@ -6,11 +6,9 @@
  */
 
 get_header();
-
 ?>
 
-<section>Body section</section>
+<div class="content">Body text</div>
 
 <?php
-
 get_footer();
