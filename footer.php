@@ -8,7 +8,11 @@
 ?>
 
 </div>
-<footer>Footer</footer>
+<footer>
+    <div class="footer-widget">
+        <?php dynamic_sidebar('sidebar-2'); ?>
+    </div>
+</footer>
 </div>
 <?php wp_footer(); ?>
 </body>

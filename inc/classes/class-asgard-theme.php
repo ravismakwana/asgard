@@ -16,6 +16,7 @@ class ASGARD_THEME {
 		Assets::get_instance(); // it calls the Assets class methods
 		Menus::get_instance();
 		MetaBox::get_instance();
+		Sidebar::get_instance();
 		$this->setup_hooks();
 	}
 
