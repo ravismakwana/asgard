@@ -62,7 +62,7 @@ $heading_class      = !empty( $hide_page_title ) && 'yes' == $hide_page_title ? 
         );
     } else {
         printf(
-                '<h2 class="entry-title mb-3"><a href="%1$s" class="text-dark h5 text-decoration-none ">%2$s</a></h2>',
+                '<h2 class="entry-title mb-3"><a href="%1$s" class="text-dark text-decoration-none ">%2$s</a></h2>',
 	            esc_url( get_the_permalink($the_post_id) ),
 	            wp_kses_post( get_the_title() )
         );
