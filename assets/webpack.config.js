@@ -3,6 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin'); // https://webpack.js.org/plugins/copy-webpack-plugin/
+const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
 
 const JS_DIR = path.resolve(__dirname, 'src/js');
 const IMG_DIR = path.resolve(__dirname, 'src/img');
@@ -12,6 +14,8 @@ const BUILD_DIR = path.resolve(__dirname, 'build');
 const entry = {
     main: JS_DIR + '/main.js',
     single: JS_DIR + '/single.js',
+    editor: JS_DIR + '/editor.js',
+    blocks: JS_DIR + '/blocks.js',
 };
 const output = {
     path: BUILD_DIR,
@@ -48,6 +52,9 @@ const rules = [
     },
     {
         test: /\.(png|jpg|jpeg|svg|gif|ico)$/,
+        generator: {
+            filename: '[path][name].[ext]',
+        },
         use: [
             {
                 loader: 'file-loader',
@@ -64,13 +71,15 @@ const rules = [
         generator: {
             filename: '[path][name].[ext]',
         },
-        use: {
-            loader: 'file-loader',
-            options: {
-                name: '[path][name].[ext]',
-                publicPath: 'production' === process.env.NODE_ENV ? '../' : '../../'
+        use: [
+            {
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                    publicPath: 'production' === process.env.NODE_ENV ? '../' : '../../'
+                }
             }
-        }
+        ]
     }
 
 ];
@@ -82,8 +91,16 @@ const plugins = ( argv ) => [
     new MiniCssExtractPlugin({
         filename: 'css/[name].css'
     }),
+    new CopyPlugin( {
+        patterns: [
+            { from: LIB_DIR, to: BUILD_DIR + '/library' }
+        ]
+    } ),
     new CssMinimizerPlugin(),
-
+    new DependencyExtractionWebpackPlugin({
+        injectPolyfill: true,
+        combineAssets: true,
+    })
 ];
 module.exports = ( env , argv ) => ({
     entry : entry,

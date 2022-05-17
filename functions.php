@@ -15,6 +15,12 @@ if(!defined('ASGARD_DIR_URI')) {
 if(!defined('ASGARD_BUILD_DIR_URI')) {
 	define('ASGARD_BUILD_DIR_URI', untrailingslashit( get_template_directory_uri() ).'/assets/build');
 }
+if(!defined('ASGARD_BUILD_LIB_URI')) {
+	define('ASGARD_BUILD_LIB_URI', untrailingslashit( get_template_directory_uri() ).'/assets/build/library');
+}
+if(!defined('ASGARD_BUILD_DIR_PATH')) {
+	define('ASGARD_BUILD_DIR_PATH', untrailingslashit( get_template_directory() ).'/assets/build');
+}
 if(!defined('ASGARD_BUILD_JS_URI')) {
 	define('ASGARD_BUILD_JS_URI', untrailingslashit( get_template_directory_uri() ).'/assets/build/js');
 }
@@ -41,3 +47,10 @@ function asgard_get_theme_instance(){
 	\ASGARD_THEME\Inc\ASGARD_THEME::get_instance();
 }
 asgard_get_theme_instance();
+
+// To check Blocks attributes
+//$my_post = get_post(2);
+//$parsed_blocks = parse_blocks($my_post->post_content);
+//echo '<pre>';
+//print_r($parsed_blocks);
+//wp_die();

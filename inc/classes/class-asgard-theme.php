@@ -17,6 +17,8 @@ class ASGARD_THEME {
 		Menus::get_instance();
 		MetaBox::get_instance();
 		Sidebar::get_instance();
+		Blocks::get_instance();
+		Block_Patterns::get_instance();
 		$this->setup_hooks();
 	}
 
@@ -58,11 +60,16 @@ class ASGARD_THEME {
 		/** HTML5 **/
 		add_theme_support( 'html5', [ 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ] );
 
-		add_editor_style();
+		add_theme_support('editor-styles');
+
+		add_editor_style( 'assets/build/css/editor.css' );
 
 		add_theme_support('wp-block-styles');
 
 		add_theme_support('align-wide');
+
+		// Removed core block patterns
+		remove_theme_support('core-block-patterns');
 
 		global $content_width;
 		if(!isset($content_width)) {
