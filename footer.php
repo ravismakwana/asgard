@@ -30,7 +30,6 @@
                             <li class="list-unstyled">
                                 <a href="https://www.linkedin.com/" ><svg width="48" height="48"><use href="#icon-linkedin"></use></svg></a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
