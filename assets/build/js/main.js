@@ -160,6 +160,89 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 /***/ }),
 
+/***/ "./src/js/posts/loadmore.js":
+/*!**********************************!*\
+  !*** ./src/js/posts/loadmore.js ***!
+  \**********************************/
+/***/ (function() {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+(function ($) {
+  var LoadMore = /*#__PURE__*/function () {
+    function LoadMore() {
+      var _ajax_object$ajax_url, _ajax_object, _ajax_object$ajax_non, _ajax_object2;
+
+      _classCallCheck(this, LoadMore);
+
+      this.ajaxUrl = (_ajax_object$ajax_url = (_ajax_object = ajax_object) === null || _ajax_object === void 0 ? void 0 : _ajax_object.ajax_url) !== null && _ajax_object$ajax_url !== void 0 ? _ajax_object$ajax_url : '';
+      this.ajaxNonce = (_ajax_object$ajax_non = (_ajax_object2 = ajax_object) === null || _ajax_object2 === void 0 ? void 0 : _ajax_object2.ajax_nonce) !== null && _ajax_object$ajax_non !== void 0 ? _ajax_object$ajax_non : '';
+      this.loadMoreBtn = $("#load-more");
+      this.init();
+    }
+
+    _createClass(LoadMore, [{
+      key: "init",
+      value: function init() {
+        var _this = this;
+
+        if (!this.loadMoreBtn.length) {
+          return null;
+        }
+
+        this.loadMoreBtn.on('click', function () {
+          _this.handleLoadMorePosts();
+        });
+      }
+    }, {
+      key: "handleLoadMorePosts",
+      value: function handleLoadMorePosts() {
+        var _this2 = this;
+
+        var page = this.loadMoreBtn.data('page');
+
+        if (!page) {
+          return null;
+        }
+
+        var newPage = parseInt(page) + 1;
+        $.ajax({
+          url: this.ajaxUrl,
+          type: 'POST',
+          data: {
+            page: page,
+            action: 'loadmore_posts',
+            ajax_nonce: this.ajaxNonce
+          },
+          success: function success(response) {
+            // console.log( response );
+            if (0 === parseInt(response)) {
+              _this2.loadMoreBtn.remove();
+            } else {
+              _this2.loadMoreBtn.data('page', newPage);
+
+              $('#load-more-content').append(response);
+            }
+          },
+          error: function error(response) {
+            console.log(response);
+          }
+        });
+      }
+    }]);
+
+    return LoadMore;
+  }();
+
+  new LoadMore();
+})(jQuery);
+
+/***/ }),
+
 /***/ "./src/img/PhotoFunia1.jpg":
 /*!*********************************!*\
   !*** ./src/img/PhotoFunia1.jpg ***!
@@ -313,12 +396,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _clock__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_clock__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./carousel */ "./src/js/carousel/index.js");
 /* harmony import */ var _carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_carousel__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sass/main.scss */ "./src/sass/main.scss");
-/* harmony import */ var _img_PhotoFunia1_jpg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/PhotoFunia1.jpg */ "./src/img/PhotoFunia1.jpg");
-/* harmony import */ var _img_patterns_bg_jpeg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/patterns/bg.jpeg */ "./src/img/patterns/bg.jpeg");
-/* harmony import */ var _img_patterns_c1_150x150_jpeg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../img/patterns/c1-150x150.jpeg */ "./src/img/patterns/c1-150x150.jpeg");
-/* harmony import */ var _img_patterns_c2_150x150_jpeg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../img/patterns/c2-150x150.jpeg */ "./src/img/patterns/c2-150x150.jpeg");
-/* harmony import */ var _img_patterns_c3_150x150_jpeg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../img/patterns/c3-150x150.jpeg */ "./src/img/patterns/c3-150x150.jpeg");
+/* harmony import */ var _posts_loadmore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./posts/loadmore */ "./src/js/posts/loadmore.js");
+/* harmony import */ var _posts_loadmore__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_posts_loadmore__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../sass/main.scss */ "./src/sass/main.scss");
+/* harmony import */ var _img_PhotoFunia1_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/PhotoFunia1.jpg */ "./src/img/PhotoFunia1.jpg");
+/* harmony import */ var _img_patterns_bg_jpeg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../img/patterns/bg.jpeg */ "./src/img/patterns/bg.jpeg");
+/* harmony import */ var _img_patterns_c1_150x150_jpeg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../img/patterns/c1-150x150.jpeg */ "./src/img/patterns/c1-150x150.jpeg");
+/* harmony import */ var _img_patterns_c2_150x150_jpeg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../img/patterns/c2-150x150.jpeg */ "./src/img/patterns/c2-150x150.jpeg");
+/* harmony import */ var _img_patterns_c3_150x150_jpeg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../img/patterns/c3-150x150.jpeg */ "./src/img/patterns/c3-150x150.jpeg");
+
 
  // Styles
 

@@ -42,6 +42,13 @@ class Assets {
 		wp_enqueue_script('bootstrap');
 		wp_enqueue_script('main');
 		wp_enqueue_script('slick-slider');
+
+		wp_localize_script( 'main', 'ajax_object',
+			[
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'ajax_nonce' => wp_create_nonce('loadmore_posts_nonce')
+			]
+		);
 	}
 	/**
 	 * Enqueue editor scripts and styles.
