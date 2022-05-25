@@ -182,6 +182,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       this.ajaxUrl = (_ajax_object$ajax_url = (_ajax_object = ajax_object) === null || _ajax_object === void 0 ? void 0 : _ajax_object.ajax_url) !== null && _ajax_object$ajax_url !== void 0 ? _ajax_object$ajax_url : '';
       this.ajaxNonce = (_ajax_object$ajax_non = (_ajax_object2 = ajax_object) === null || _ajax_object2 === void 0 ? void 0 : _ajax_object2.ajax_nonce) !== null && _ajax_object$ajax_non !== void 0 ? _ajax_object$ajax_non : '';
       this.loadMoreBtn = $("#load-more");
+      this.options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1.0
+      };
       this.init();
     }
 
@@ -194,9 +199,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return null;
         }
 
-        this.loadMoreBtn.on('click', function () {
-          _this.handleLoadMorePosts();
-        });
+        var observer = new IntersectionObserver(function (entires) {
+          return _this.IntersectionObserverCallback(entires);
+        }, this.options);
+        observer.observe(this.loadMoreBtn[0]); // this.loadMoreBtn.on('click', () => {
+        //     this.handleLoadMorePosts();
+        // });
       }
     }, {
       key: "handleLoadMorePosts",
@@ -230,6 +238,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           },
           error: function error(response) {
             console.log(response);
+          }
+        });
+      }
+    }, {
+      key: "IntersectionObserverCallback",
+      value: function IntersectionObserverCallback(entries) {
+        var _this3 = this;
+
+        entries.forEach(function (entry) {
+          if (entry !== null && entry !== void 0 && entry.isIntersecting) {
+            _this3.handleLoadMorePosts();
           }
         });
       }

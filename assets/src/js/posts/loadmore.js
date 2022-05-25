@@ -4,16 +4,22 @@
             this.ajaxUrl = ajax_object?.ajax_url ?? '';
             this.ajaxNonce = ajax_object?.ajax_nonce ?? '';
             this.loadMoreBtn = $("#load-more");
+            this.options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 1.0
+            }
             this.init();
         }
         init() {
             if( ! this.loadMoreBtn.length ) {
                 return null;
             }
-
-            this.loadMoreBtn.on('click', () => {
-                this.handleLoadMorePosts();
-            });
+            const  observer = new IntersectionObserver((entires) => this.IntersectionObserverCallback( entires ), this.options);
+            observer.observe(this.loadMoreBtn[ 0 ]);
+            // this.loadMoreBtn.on('click', () => {
+            //     this.handleLoadMorePosts();
+            // });
         }
 
         handleLoadMorePosts() {
@@ -43,6 +49,14 @@
                 error: ( response ) => {
                     console.log( response );
                 },
+            });
+        }
+
+        IntersectionObserverCallback( entries ){
+            entries.forEach(( entry ) => {
+                if(entry?.isIntersecting ) {
+                    this.handleLoadMorePosts();
+                }
             });
         }
     }

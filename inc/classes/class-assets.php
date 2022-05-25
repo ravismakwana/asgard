@@ -36,12 +36,18 @@ class Assets {
 
 	public function register_scripts(){
 		wp_register_script('main', ASGARD_BUILD_JS_URI.'/main.js', ['jquery', 'slick-slider'], filemtime(ASGARD_BUILD_JS_DIR_PATH.'/main.js'), true);
+		wp_register_script('author-js', ASGARD_BUILD_JS_URI.'/author.js', ['jquery'], filemtime(ASGARD_BUILD_JS_DIR_PATH.'/author.js'), true);
 		wp_register_script('bootstrap', ASGARD_BUILD_LIB_URI.'/js/bootstrap.min.js', ['jquery'], false, true);
 		wp_register_script('slick-slider', ASGARD_BUILD_LIB_URI.'/js/slick.min.js', ['jquery'], false, true);
 
 		wp_enqueue_script('bootstrap');
 		wp_enqueue_script('main');
 		wp_enqueue_script('slick-slider');
+
+		if( is_author() ) {
+			wp_enqueue_script('author-js');
+		}
+
 
 		wp_localize_script( 'main', 'ajax_object',
 			[

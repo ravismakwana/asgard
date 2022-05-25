@@ -4,9 +4,9 @@
  *
  * @package Asgard
  */
-$responsiveClasses = (!is_single()) ? ' col-md-4 col-sm-6 ': '';
+$container_classes = (!empty( $args['container_classes']) || (is_blog() )) ? $args['container_classes'] : 'mb-5';
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class('mb-5'. $responsiveClasses ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( $container_classes ); ?>>
 
     <?php
         get_template_part('template-parts/components/blog/entry-header');

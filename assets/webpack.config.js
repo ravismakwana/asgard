@@ -16,6 +16,7 @@ const entry = {
     single: JS_DIR + '/single.js',
     editor: JS_DIR + '/editor.js',
     blocks: JS_DIR + '/blocks.js',
+    author: JS_DIR + '/author.js',
 };
 const output = {
     path: BUILD_DIR,
@@ -36,19 +37,6 @@ const rules = [
             'css-loader',
             'sass-loader',
         ],
-    },
-    {
-        test: /\.sass$/i,
-        use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-            {
-                loader: 'sass-loader',
-                options: {
-                    sassOptions: { indentedSyntax: true }
-                }
-            }
-        ]
     },
     {
         test: /\.(png|jpg|jpeg|svg|gif|ico)$/,

@@ -36,6 +36,12 @@ if(!defined('ASGARD_BUILD_CSS_URI')) {
 if(!defined('ASGARD_BUILD_CSS_DIR_PATH')) {
 	define('ASGARD_BUILD_CSS_DIR_PATH', untrailingslashit( get_template_directory() ).'/assets/build/css');
 }
+if(!defined('ASGARD_ARCHIVE_POST_PER_PAGE')) {
+	define('ASGARD_ARCHIVE_POST_PER_PAGE', 6);
+}
+if(!defined('ASGARD_SEARCH_RESULTS_POST_PER_PAGE')) {
+	define('ASGARD_SEARCH_RESULTS_POST_PER_PAGE', 10);
+}
 
 // Helper folder includes
 require_once ASGARD_DIR_PATH .'/inc/helpers/autoloader.php';
